@@ -1,0 +1,27 @@
+{
+  "name": "serverless-api-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "dev": "nodemon -e .js,.json -x ./node_modules/.bin/serverless offline start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "nodemon": "^2.0.4",
+    "serverless": "^1.81.1",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-webpack": "^5.3.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.746.0",
+    "serverless-dotenv-plugin": "^3.0.0",
+    "uuid": "^8.3.0"
+  }
+}

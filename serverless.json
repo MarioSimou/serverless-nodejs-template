@@ -1,0 +1,89 @@
+{
+    "service": "serverless-api-nodejs",
+    "provider": {
+        "name": "aws",
+        "runtime": "nodejs12.x",
+        "stage": "dev",
+        "region": "us-east-1"
+    },
+    "custom": {
+        "dotenv": {
+            "path": "./.env.development"
+        },
+        "webpack": {
+            "config": "./webpack.config.js"
+        },
+        "dynamodb": {
+            "migration": {
+                "dir": "./migrations",
+                "table_prefix": "nodejs"
+            },
+            "stages": ["dev"],
+            "start": {
+                "port": 8000,
+                "inMemory": true,
+                "heapInitial": "200m",
+                "heapMax": "1g",
+                "migrate": true,
+                "seed": true,
+                "convertEmptyValues": true
+            }
+        }
+    },
+    "functions": {
+        "getUsersController": {
+            "handler": "src/controllers/index.getUsers",
+            "events": [
+                {
+                    "http": {
+                        "path": "/users",
+                        "method": "GET"
+                    }
+                }
+            ]
+        },
+        "postUsersController": {
+            "handler": "src/controllers/index.postUser",
+            "events": [
+                {
+                    "http": {
+                        "path": "/users",
+                        "method": "POST"
+                    }
+                }
+            ]
+        }
+    },
+    "plugins": [
+        "serverless-dotenv-plugin",
+        "serverless-webpack",
+        "serverless-dynamodb-local",
+        "serverless-offline"
+    ],
+    "resources": {
+        "Resources": {
+            "table": {
+                "Type": "AWS::DynamoDB::Table",
+                "Properties": {
+                    "TableName": "${env:DYNAMODB_TABLE_NAME}",
+                    "AttributeDefinitions": [
+                        {
+                            "AttributeName": "id",
+                            "AttributeType": "S"
+                        }
+                    ],
+                    "KeySchema": [
+                        {
+                            "AttributeName": "id",
+                            "KeyType": "HASH"
+                        }
+                    ],
+                    "ProvisionedThroughput": {
+                        "ReadCapacityUnits": 1,
+                        "WriteCapacityUnits": 1
+                    }
+                }
+            }
+        }
+    }
+}
