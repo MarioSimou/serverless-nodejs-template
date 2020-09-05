@@ -7,6 +7,9 @@
         "region": "us-east-1"
     },
     "custom": {
+        "serverless-offline": {
+            "useChildProcesses": true
+        },
         "dotenv": {
             "path": "./.env.development"
         },
@@ -20,7 +23,7 @@
             },
             "stages": ["dev"],
             "start": {
-                "port": 8000,
+                "port": "${env:DYNAMODB_PORT}",
                 "inMemory": true,
                 "heapInitial": "200m",
                 "heapMax": "1g",
@@ -31,32 +34,65 @@
         }
     },
     "functions": {
-        "getUsersController": {
-            "handler": "src/controllers/index.getUsers",
+        "getManyController": {
+            "handler": "src/controllers/index.getManyResource",
             "events": [
                 {
                     "http": {
-                        "path": "/users",
+                        "path": "/${env:DEFAULT_RESOURCE_NAME}",
                         "method": "GET"
                     }
                 }
             ]
         },
-        "postUsersController": {
-            "handler": "src/controllers/index.postUser",
+        "getSingleController": {
+            "handler": "src/controllers/index.getSingleResource",
             "events": [
                 {
                     "http": {
-                        "path": "/users",
+                        "path": "/${env:DEFAULT_RESOURCE_NAME}/{id}",
+                        "method": "GET"
+                    }
+                }
+            ]
+        },
+        "postController": {
+            "handler": "src/controllers/index.postResource",
+            "events": [
+                {
+                    "http": {
+                        "path": "/${env:DEFAULT_RESOURCE_NAME}",
                         "method": "POST"
+                    }
+                }
+            ]
+        },
+        "deleteController": {
+            "handler": "src/controllers/index.deleteResource",
+            "events": [
+                {
+                    "http": {
+                        "path": "/${env:DEFAULT_RESOURCE_NAME}/{id}",
+                        "method": "DELETE"
+                    }
+                }
+            ]
+        },
+        "putController": {
+            "handler": "src/controllers/index.putResource",
+            "events": [
+                {
+                    "http": {
+                        "path": "/${env:DEFAULT_RESOURCE_NAME}/{id}",
+                        "method": "PUT"
                     }
                 }
             ]
         }
     },
     "plugins": [
-        "serverless-dotenv-plugin",
         "serverless-webpack",
+        "serverless-dotenv-plugin",        
         "serverless-dynamodb-local",
         "serverless-offline"
     ],

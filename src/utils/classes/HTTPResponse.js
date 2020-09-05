@@ -35,8 +35,8 @@ function HTTPError({statusCode, message}){
 
     HTTPResponse.call(this, {statusCode, message, success: false})
 }
-
-
+HTTPError.prototype = Object.create(HTTPResponse.prototype)
+HTTPError.prototype.constructor = HTTPError
 
 export {
     HTTPResponse,
