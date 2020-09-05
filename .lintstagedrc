@@ -1,0 +1,9 @@
+{
+  "src/**/*.{js,json}": [
+    "npm run eslint",
+    "npm run prettier"
+  ],
+  "src/**/*.spec.js": [
+    "npm run unit"
+  ]
+}
