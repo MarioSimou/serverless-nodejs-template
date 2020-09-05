@@ -7,17 +7,21 @@
     "dev": "nodemon -e .js,.json -x ./node_modules/.bin/serverless offline start",
     "prettier": "./node_modules/.bin/prettier --config prettier.config.js --write 'src/**/*.{js,json}'",
     "precommit": "./node_modules/.bin/lint-staged --config .lintstagedrc",
-    "eslint": "./node_modules/.bin/eslint -c .eslintrc.js 'src/**/*.{js,json}'"
+    "eslint": "./node_modules/.bin/eslint -c .eslintrc.js 'src/**/*.{js,json}'",
+    "unit": "./node_modules/.bin/jest --config=jest.config.js \"src/.*\\.spec\\.js\"",
+    "unit:watch": "npm run unit -- --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "eslint": "^7.8.1",
     "husky": "^4.2.5",
+    "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
     "nodemon": "^2.0.4",
     "prettier": "2.1.1",

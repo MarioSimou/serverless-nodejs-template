@@ -13,6 +13,9 @@ module.exports = {
     },
     "globals": {
         "process": true,
+        "describe": true,
+        "it": true,
+        "expect": true,
     },
     "rules": {
         "no-console": 2,
