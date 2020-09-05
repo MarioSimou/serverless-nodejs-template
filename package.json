@@ -4,7 +4,10 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "dev": "nodemon -e .js,.json -x ./node_modules/.bin/serverless offline start"
+    "dev": "nodemon -e .js,.json -x ./node_modules/.bin/serverless offline start",
+    "prettier": "./node_modules/.bin/prettier --config prettier.config.js --write 'src/**/*.{js,json}'",
+    "precommit": "./node_modules/.bin/lint-staged --config .lintstagedrc"
+
   },
   "keywords": [],
   "author": "",
@@ -12,7 +15,10 @@
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
     "babel-loader": "^8.1.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.3.0",
     "nodemon": "^2.0.4",
+    "prettier": "2.1.1",
     "serverless": "^1.81.1",
     "serverless-dotenv-plugin": "^3.0.0",
     "serverless-dynamodb-local": "^0.2.39",
@@ -24,5 +30,10 @@
   "dependencies": {
     "aws-sdk": "^2.746.0",
     "uuid": "^8.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
