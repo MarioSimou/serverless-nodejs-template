@@ -9,7 +9,8 @@
     "precommit": "./node_modules/.bin/lint-staged --config .lintstagedrc",
     "eslint": "./node_modules/.bin/eslint -c .eslintrc.js 'src/**/*.{js,json}'",
     "unit": "./node_modules/.bin/jest --config=jest.config.js \"src/.*\\.spec\\.js\"",
-    "unit:watch": "npm run unit -- --watch"
+    "unit:watch": "npm run unit -- --watch",
+    "unit:coverage": "npm run unit -- --coverage"
   },
   "keywords": [],
   "author": "",
